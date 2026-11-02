@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="El dokuması hasır sepet illüstrasyonu">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ecd8bb"/>
+      <stop offset="1" stop-color="#d3b18a"/>
+    </linearGradient>
+    <linearGradient id="weave" x1="0" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#d9ae73"/>
+      <stop offset="0.5" stop-color="#b98850"/>
+      <stop offset="1" stop-color="#8e6236"/>
+    </linearGradient>
+    <pattern id="cross" width="26" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(14)">
+      <rect width="26" height="26" fill="url(#weave)"/>
+      <path d="M0 8h26M0 19h26" stroke="#6f4a26" stroke-opacity="0.30" stroke-width="4"/>
+      <path d="M7 0v26M20 0v26" stroke="#f2d4a6" stroke-opacity="0.32" stroke-width="4"/>
+    </pattern>
+    <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="20" stdDeviation="22" flood-color="#4a2e17" flood-opacity="0.28"/>
+    </filter>
+    <clipPath id="clip">
+      <path d="M226 350h348l-38 236c-4 26-60 44-136 44s-132-18-136-44z"/>
+    </clipPath>
+  </defs>
+  <rect width="800" height="800" fill="url(#bg)"/>
+  <ellipse cx="400" cy="644" rx="182" ry="24" fill="#6b4525" fill-opacity="0.18"/>
+  <g filter="url(#shadow)">
+    <path d="M262 348c-40-26-46-92-4-112 34-16 62 8 74 46" fill="none" stroke="#a2743f" stroke-width="20" stroke-linecap="round"/>
+    <path d="M538 348c40-26 46-92 4-112-34-16-62 8-74 46" fill="none" stroke="#a2743f" stroke-width="20" stroke-linecap="round"/>
+    <path d="M226 350h348l-38 236c-4 26-60 44-136 44s-132-18-136-44z" fill="url(#cross)"/>
+    <g clip-path="url(#clip)" fill="none" stroke="#67421f" stroke-opacity="0.18" stroke-width="6">
+      <path d="M220 410h360M220 470h360M220 530h360M220 590h360"/>
+    </g>
+    <path d="M226 350h348l-38 236c-4 26-60 44-136 44s-132-18-136-44z" fill="none" stroke="#7c532c" stroke-opacity="0.5" stroke-width="6"/>
+    <rect x="212" y="326" width="376" height="46" rx="23" fill="#c19057"/>
+    <rect x="212" y="326" width="376" height="46" rx="23" fill="none" stroke="#8a5f32" stroke-width="5"/>
+    <path d="M232 344h336" stroke="#f0d0a0" stroke-opacity="0.55" stroke-width="5" stroke-linecap="round"/>
+  </g>
+</svg>

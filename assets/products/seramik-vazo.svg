@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="Mat beyaz seramik vazo illüstrasyonu">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ecd8bb"/>
+      <stop offset="1" stop-color="#d3b18a"/>
+    </linearGradient>
+    <linearGradient id="ceramic" x1="0" y1="0" x2="1" y2="0.3">
+      <stop offset="0" stop-color="#fffdf9"/>
+      <stop offset="0.55" stop-color="#f4eee5"/>
+      <stop offset="1" stop-color="#d9cdbd"/>
+    </linearGradient>
+    <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="20" stdDeviation="22" flood-color="#4a2e17" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+  <rect width="800" height="800" fill="url(#bg)"/>
+  <g fill="none" stroke="#8a704f" stroke-width="5" stroke-linecap="round" opacity="0.85">
+    <path d="M400 292c-6-70-30-120-72-170"/>
+    <path d="M404 292c8-80 34-132 86-178"/>
+    <path d="M398 292c-2-58 2-104-8-150"/>
+  </g>
+  <g fill="#a98a5e" opacity="0.85">
+    <ellipse cx="326" cy="118" rx="10" ry="24" transform="rotate(-28 326 118)"/>
+    <ellipse cx="342" cy="148" rx="9" ry="21" transform="rotate(-25 342 148)"/>
+    <ellipse cx="486" cy="110" rx="10" ry="25" transform="rotate(32 486 110)"/>
+    <ellipse cx="470" cy="146" rx="9" ry="21" transform="rotate(28 470 146)"/>
+    <ellipse cx="390" cy="140" rx="9" ry="23" transform="rotate(-6 390 140)"/>
+  </g>
+  <ellipse cx="400" cy="640" rx="150" ry="22" fill="#6b4525" fill-opacity="0.16"/>
+  <g filter="url(#shadow)">
+    <path d="M362 278h76l6 40c44 24 76 74 80 138 7 108-46 184-124 184s-131-76-124-184c4-64 36-114 80-138z" fill="url(#ceramic)"/>
+    <path d="M362 278h76l6 40c44 24 76 74 80 138 7 108-46 184-124 184s-131-76-124-184c4-64 36-114 80-138z" fill="none" stroke="#cdbfa9" stroke-opacity="0.8" stroke-width="4"/>
+    <ellipse cx="400" cy="278" rx="38" ry="11" fill="#e6ddd0"/>
+    <ellipse cx="400" cy="278" rx="38" ry="11" fill="none" stroke="#c8b9a4" stroke-width="4"/>
+    <ellipse cx="400" cy="279" rx="27" ry="6" fill="#a99a86" fill-opacity="0.55"/>
+    <path d="M296 470c8 76 46 130 104 140" fill="none" stroke="#ffffff" stroke-opacity="0.75" stroke-width="14" stroke-linecap="round"/>
+  </g>
+</svg>
