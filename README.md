@@ -1,42 +1,64 @@
-# Liva Atölye — Basit Satıcı Web Sitesi
+# Liva Atölye — Giriş Ekranı (Django + SQLite)
 
-El yapımı ev eşyaları satan kurgusal bir satıcı (butik atölye) için **bağımlılıksız, statik** bir mağaza sitesi. Sadece HTML, CSS ve vanilla JavaScript kullanır; build adımı, framework veya veritabanı gerektirmez.
+Önceki statik mağaza kaldırıldı; proje **Django 5.2** ile, **yalnızca giriş (login) akışı** olacak şekilde yeniden tasarlandı. Kullanıcı verileri varsayılan **SQLite** veritabanında (`db.sqlite3`) ve Django'nun yerleşik `auth` / `sessions` uygulamalarında tutulur.
 
-## Çalıştırma
+> Kayıt olma, şifre sıfırlama, ürün veya sipariş ekranı **yoktur**: `/login/` → giriş, `/` → giriş sonrası kısa doğrulama ekranı, `/logout/` → çıkış.
 
-Depoyu klonladıktan sonra kök dizinde herhangi bir statik sunucu yeterlidir:
+## Kurulum ve çalıştırma
 
 ```bash
-python3 -m http.server 3000
-# ardından http://localhost:3000 adresini açın
+pip install -r requirements.txt
+python manage.py migrate                # SQLite tablolarını oluşturur
+python manage.py seed_demo              # demo kullanıcıyı ekler
+python manage.py runserver 0.0.0.0:3000
 ```
 
-Alternatif olarak `index.html` dosyasını doğrudan tarayıcıda açabilirsiniz (sepet/favoriler için `localStorage` dosya şemasında da genellikle çalışır).
+Ardından `http://localhost:3000/login/` adresini açın.
 
-## Özellikler
+**Demo hesap:** `demo` / `Demo1234!` (giriş ekranındaki "Doldur" butonu alanları otomatik doldurur).
 
-- **Ürün vitrini**: 6 ürün, kategori filtreleri, metin araması, fiyat/puan sıralama, favoriler
-- **Ürün detayı**: görsel, açıklama, özellik listesi, adet seçimi ve sepete ekleme (modal)
-- **Sepet**: adet artırma/azaltma, ürün çıkarma, ara toplam, 750 ₺ üzeri ücretsiz kargo göstergesi, `localStorage` ile kalıcılık
-- **Satıcı profili**: hikâye, konum, puan ve doğrulanmış satıcı bilgileri
-- **İletişim**: bilgi kartları ve demo form (veri göndermez, bildirim gösterir)
-- ** responsive tasarım**, klavye ile kullanım (ESC ile kapatma), `aria` etiketleri, hareket azaltma tercihi desteği
+Kullanıcı adı/parolayı değiştirmek isterseniz:
 
-> **Not:** Ödeme, sipariş ve form gönderimi demo amaçlıdır; gerçek bir backend veya ödeme altyapısı bağlı değildir. Ürün/fiyat bilgileri `js/app.js` içindeki `PRODUCTS` dizisinden, görseller `assets/` klasöründen değiştirilebilir.
+```bash
+python manage.py seed_demo --username admin --password YeniParola123!
+```
+
+## Testler
+
+```bash
+python manage.py test
+```
+
+SQLite kullanımı, giriş sayfası, hatalı/doğru parola, "beni hatırla" oturum süresi, giriş zorunluluğu, çıkış ve `seed_demo` komutu test edilir.
+
+## URL'ler
+
+| Adres | Açıklama |
+| --- | --- |
+| `/login/` | Giriş formu (`LoginView` + özel `LoginForm`) |
+| `/` | Giriş yapmış kullanıcı için "Giriş başarılı" ekranı; misafir `/login/`'e yönlenir |
+| `/logout/` | Yalnızca `POST` ile çıkış |
 
 ## Dosya yapısı
 
 ```
-index.html                # Sayfa iskeleti ve ikon sprite'ları
-css/styles.css            # Tüm stiller ve responsive kurallar
-js/app.js                 # Ürün verisi, filtreleme, sepet, modal, form
-assets/products/*.webp    # Ürün fotoğrafları
-assets/products/*.svg     # Ürün illüstrasyonları
+manage.py
+requirements.txt
+config/          settings.py (SQLite, auth, güvenlik), urls.py, wsgi.py, asgi.py
+accounts/
+  forms.py       Türkçe doğrulama mesajları + alan sınıfları
+  views.py       LoginView (beni hatırla) ve giriş sonrası home
+  urls.py        login / logout / home
+  tests.py       akış testleri
+  management/commands/seed_demo.py
+  templates/accounts/  login.html, home.html
+  static/accounts/     css/style.css, js/login.js, img/login-panel.webp
+templates/base.html    ortak iskelet + SVG ikon spriteları
 ```
 
-## Özelleştirme
+## Notlar
 
-- Ürün eklemek/çıkarmak için `PRODUCTS` dizisini düzenleyin; kategori filtreleri diziden otomatik üretilir.
-- Renk paleti `css/styles.css` dosyasının başındaki `:root` değişkenlerinde.
-- Ücretsiz kargo limiti `js/app.js` içindeki `FREE_SHIPPING` sabitinde.
-- Satıcı adı, iletişim bilgileri ve metinler `index.html` içinde.
+- `db.sqlite3` ve `__pycache__` Git'e eklenmez; her klonda `migrate` + `seed_demo` çalıştırın.
+- Üretim/demo dışı kullanım için `DJANGO_SECRET_KEY`, `DJANGO_DEBUG=0` ve `DJANGO_ALLOWED_HOSTS` ortam değişkenlerini ayarlayın. Önizleme sunucuları için `DJANGO_CSRF_ORIGINS` varsayılan olarak `https://*.e2b.app` içerir.
+- `SECRET_KEY` dosyadaki hâli yalnızca geliştirme içindir.
+- "Beni hatırla" seçilmezse oturum tarayıcı kapanınca biter; seçilirse 14 gün geçerlidir.

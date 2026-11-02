@@ -1,18 +1,28 @@
+# Django / SQLite
+db.sqlite3
+db.sqlite3-journal
+*.sqlite3
+__pycache__/
+*.py[cod]
+staticfiles/
+media/
+.env
+
+# Sanal ortam
+.venv/
+venv/
+env/
+
 # Bağımlılık / derleme artıkları
 node_modules/
 dist/
 build/
-.vite/
-.next/
 
-# Editör ve işletim sistemi dosyaları
+# Editör ve işletim sistemi
 .DS_Store
 Thumbs.db
 *.swp
 .idea/
 .vscode/
-
-# Geçici dosyalar
 *.log
 .cache/
-*.tmp

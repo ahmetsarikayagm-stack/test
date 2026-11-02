@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Giriş başarılı | Liva Atölye{% endblock %}
+{% block body_class %}page-home{% endblock %}
+
+{% block content %}
+<main class="success-shell">
+  <div class="success-card">
+    <div class="success-mark"><svg class="icon"><use href="#i-check"></use></svg></div>
+    <p class="eyebrow">Oturum açık</p>
+    <h1>Giriş başarılı</h1>
+    <p class="success-lead">Hoş geldin, <strong>{{ user.get_username }}</strong>. Bu demo yalnızca giriş akışını içerir; başka bir sayfa ya da işlem yok.</p>
+
+    <dl class="session-meta">
+      <div><dt>Kullanıcı</dt><dd>{{ user.get_username }}</dd></div>
+      <div><dt>Son giriş</dt><dd>{% if user.last_login %}{{ user.last_login|date:"d.m.Y H:i" }}{% else %}İlk giriş{% endif %}</dd></div>
+      <div><dt>Veritabanı</dt><dd>SQLite · db.sqlite3</dd></div>
+    </dl>
+
+    <form method="post" action="{% url 'accounts:logout' %}">
+      {% csrf_token %}
+      <button type="submit" class="btn-submit"><span>Çıkış yap</span><svg class="icon"><use href="#i-logout"></use></svg></button>
+    </form>
+  </div>
+  <p class="success-foot">© {% now "Y" %} Liva Atölye · Django + SQLite demo</p>
+</main>
+{% endblock %}
